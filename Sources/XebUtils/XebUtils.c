@@ -1,11 +1,37 @@
-    //
-    //  File.c
-    //
-    //
-    //  Created by Sameer Jagtap on 25/05/21.
-    //
-
 #include "include/XebUtils.h"
+
+void toString(char str[], int num)
+{
+    int i, rem, len = 0, n;
+    
+    n = num;
+    while (n != 0)
+    {
+        len++;
+        n /= 10;
+    }
+    for (i = 0; i < len; i++)
+    {
+        rem = num % 10;
+        num = num / 10;
+        str[len - (i + 1)] = rem + '0';
+    }
+    str[len] = '\0';
+}
+
+int toInt(char str[])
+{
+    int len = strlen(str);
+    int i, num = 0;
+    
+    for (i = 0; i < len; i++)
+    {
+        num = num + ((str[len - (i + 1)] - '0') * pow(10, i));
+    }
+    
+    return num;
+}
+
 
 const char* getIPAddressFromXebUtils() {
     int fd;
@@ -29,12 +55,13 @@ const char* getIPAddressFromXebUtils() {
     return inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
 }
 
-int hostnameToIP(char * hostname)
+const char* hostNameToIP(char * hostname)
 {
     struct hostent *he;
     struct in_addr **addr_list;
     int i;
     char ip[100];
+    char str[100];
     
     if ( (he = gethostbyname( hostname ) ) == NULL)
     {
@@ -49,8 +76,10 @@ int hostnameToIP(char * hostname)
     {
             //Return the first one;
         strcpy(ip , inet_ntoa(*addr_list[i]) );
-        return *ip;
+        toString(str, *ip);
+        return *str;
     }
     
     return NULL;
 }
+
