@@ -55,7 +55,7 @@ const char* getIPAddressFromXebUtils() {
     return inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
 }
 
-const char* hostNameToIP(char * hostname)
+const char* hostNameToIP(char hostname)
 {
     struct hostent *he;
     struct in_addr **addr_list;
