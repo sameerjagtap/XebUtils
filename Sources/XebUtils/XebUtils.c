@@ -43,7 +43,7 @@ int hostNameToIP(const char *hostname)
     {
             //Return the first one;
         strcpy(ip , inet_ntoa(*addr_list[i]) );
-        return ip;
+        return *ip;
     }
     
     return NULL;
