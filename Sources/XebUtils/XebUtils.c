@@ -22,13 +22,12 @@ const char* getIPAddressFromXebUtils() {
     return inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
 }
 
-int hostNameToIP(const char *hostname)
+char* hostNameToIP(const char *hostname)
 {
     struct hostent *he;
     struct in_addr **addr_list;
     int i;
     char ip[100];
-    char str[100];
     
     if ( (he = gethostbyname( hostname ) ) == NULL)
     {

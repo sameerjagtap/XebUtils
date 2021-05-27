@@ -21,6 +21,6 @@
 #define atoa(x) #x
 
 const char* getIPAddressFromXebUtils();
-int hostNameToIP(const char *hostname);
+char* hostNameToIP(const char *hostname);
 
 #endif /* XebUtils_h */
